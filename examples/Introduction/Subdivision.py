@@ -1,7 +1,7 @@
 from PySubdiv.data import files
 
 # import the mesh of the coarse channel
-coarseChannel = files.read("Meshes/CoarseChannel.obj")
+coarseChannel = files.read("PySubdiv\examples\Introduction\Meshes\CoarseChannel.obj")
 # # first have a look again:
 # coarseChannel.visualize_mesh()
 # # perfoming a subivision is easy, we just have to call the method .subdivide(n)
@@ -64,5 +64,5 @@ smoothChannel = smoothChannel.subdivide(1)
 # coarseChannel.save_data("Meshes/CoarseChannelEditedData")
 # coarseChannel.load_data("Meshes/CoarseChannelEditedData")
 # And we can save the subdivision surface as well.
-smoothChannel.save_mesh("Meshes/SmoothChannel.obj")
-smoothChannel.save_data("Meshes/SmoothChannelData")
+smoothChannel.save_mesh("PySubdiv\examples\Introduction\Meshes\SmoothChannel.obj")
+smoothChannel.save_data("PySubdiv\examples\Introduction\Meshes\SmoothChannelData")
