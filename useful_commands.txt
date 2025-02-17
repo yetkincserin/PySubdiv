@@ -1,0 +1,7 @@
+pip uninstall -y pyvista QtPy PyQt5 pyvistaqt vtk numpy networkx scipy pyswarms setuptools pymeshlab
+
+pip install --no-cache-dir --no-deps --no-input --force-reinstall "pyvista==0.33.0" "QtPy==2.0.0" "PyQt5==5.15.6" "pyvistaqt==0.6.0" "vtk==9.2.2" "numpy==1.22.0" "networkx==2.6.3" "scipy==1.7.3" "pyswarms==1.3.0" "setuptools==57.0.0" "pymeshlab==2022.2.post2"
+
+pip list | findstr /R "pyvista QtPy PyQt5 pyvistaqt vtk numpy networkx scipy pyswarms setuptools pymeshlab"
+
+[System.Environment]::SetEnvironmentVariable("Path", "C:\Users\yetki\OneDrive\Masaüstü\CGRE - HiWi\HiWi\PySubdiv\hiwienv\Scripts;" + ($env:Path -replace "C:\\Users\\yetki\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0;?", ""), [System.EnvironmentVariableTarget]::User)
