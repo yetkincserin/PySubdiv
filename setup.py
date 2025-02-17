@@ -19,7 +19,11 @@ setup(
         "QtPy==2.0.0",
         "vtk==9.1.0",
         "setuptools==57.0.0",
-        "easygui"
+        "easygui",
+        "appdirs",
+        "scooby",
+        "packaging",
+        "tk"  
     ],
     url="",
     license="",
