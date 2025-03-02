@@ -594,7 +594,7 @@ class ControlMesh:
         # make mesh visible
         else:
             self.plotter.add_mesh(self.input_meshes[idx_mesh], color='green', pickable=False, show_edges=True,
-                                  name=f"mesh_{idx_mesh}", opacity=100)
+                                  name=f"mesh_{idx_mesh}", opacity=1.0)
             self.plotter.add_point_labels([self.input_meshes[idx_mesh].center_of_mass()], [f"mesh_{idx_mesh}"],
                                           name=f"labels_mesh_{idx_mesh}")
             self.invisible_meshes.remove(idx_mesh)
@@ -615,7 +615,7 @@ class ControlMesh:
             else:
                 self.selected_meshes.append(idx_mesh)
                 self.plotter.add_mesh(self.input_meshes[idx_mesh], color='red', pickable=True, show_edges=True,
-                                      name=f"mesh_{idx_mesh}", opacity=100)
+                                      name=f"mesh_{idx_mesh}", opacity=1.0)
                 # set button to constrain the selection only on the boundary vertices/min max points
 
                 button_boundary_idx = self.button_widgets_boundary[f"button_boundary_{idx_mesh}"]
@@ -802,14 +802,14 @@ class ControlMesh:
                     vertices_after_threshold.append(footpoint)
             boundary_vertices = np.array(vertices_after_threshold)
             self.plotter.add_mesh(mesh, color='red', pickable=False, show_edges=True,
-                                  name=f"mesh_{idx_mesh}", opacity=100)
+                                  name=f"mesh_{idx_mesh}", opacity=1.0)
 
             self.plotter.add_points(boundary_vertices, pickable=True, name=f"constrained_mesh{idx_mesh}")
 
         else:
             # remove actor for vertices on the boundary and make the mesh pickable again
             self.plotter.add_mesh(self.input_meshes[idx_mesh], color='red', pickable=True, show_edges=True,
-                                  name=f"mesh_{idx_mesh}", opacity=100)
+                                  name=f"mesh_{idx_mesh}", opacity=1.0)
             self.plotter.remove_actor(f"constrained_mesh{idx_mesh}")
 
     def selection_to_polygon(self, check):
@@ -1293,7 +1293,7 @@ class ControlMesh:
             if face_idx is not None:
                 self.input_meshes[idx_mesh].remove_cells(face_idx, inplace=True)
                 self.plotter.add_mesh(self.input_meshes[idx_mesh], color='red', pickable=True, show_edges=True,
-                                      name=f"mesh_{idx_mesh}", opacity=100)
+                                      name=f"mesh_{idx_mesh}", opacity=1.0)
                 break
 
     def mesh_decimation(self, check):
@@ -1459,14 +1459,14 @@ class ControlMesh:
 
             # deactivate mesh for picking
             self.plotter.add_mesh(mesh, color='red', pickable=False, show_edges=True,
-                                  name=f"mesh_{idx_mesh}", opacity=100)
+                                  name=f"mesh_{idx_mesh}", opacity=1.0)
 
             if 'extrema' in mesh.array_names:
                 extrema_points_idx = np.nonzero(mesh["extrema"] == 1)
                 if len(extrema_points_idx) == 0:
                     # no min max found; make whole mesh pickable again
                     self.plotter.add_mesh(mesh, color='red', pickable=False, show_edges=True,
-                                          name=f"mesh_{idx_mesh}", opacity=100)
+                                          name=f"mesh_{idx_mesh}", opacity=1.0)
                 else:
                     extrema_points = mesh.points[extrema_points_idx]
                     self.plotter.add_points(extrema_points, pickable=True, name=f"constrained_mesh{idx_mesh}")
@@ -1524,14 +1524,14 @@ class ControlMesh:
                 if len(local_extrema) == 0:
                     # no min max found; make whole mesh pickable again
                     self.plotter.add_mesh(mesh, color='red', pickable=False, show_edges=True,
-                                          name=f"mesh_{idx_mesh}", opacity=100)
+                                          name=f"mesh_{idx_mesh}", opacity=1.0)
                 else:
                     extrema_points = points[local_extrema]
                     self.plotter.add_points(extrema_points, pickable=True, name=f"constrained_mesh{idx_mesh}")
         else:
             # remove actor for vertices on min max and make the mesh pickable again
             self.plotter.add_mesh(self.input_meshes[idx_mesh], color='red', pickable=True, show_edges=True,
-                                  name=f"mesh_{idx_mesh}", opacity=100)
+                                  name=f"mesh_{idx_mesh}", opacity=1.0)
             self.plotter.remove_actor(f"constrained_mesh{idx_mesh}")
 
     def delete_mesh(self, check, idx_mesh):
@@ -2293,7 +2293,7 @@ class PySubdivGUI(MainWindow):
         else:
             button.setToolTip('make invisible')
             self.plotter.add_mesh(self.input_meshes[idx_mesh], color='green', pickable=False, show_edges=True,
-                                  name=f"mesh_{idx_mesh}", opacity=100, reset_camera=False)
+                                  name=f"mesh_{idx_mesh}", opacity=1.0, reset_camera=False)
             self.plotter.add_point_labels([self.input_meshes[idx_mesh].center_of_mass()], [f"mesh_{idx_mesh}"],
                                           name=f"labels_mesh_{idx_mesh}", reset_camera=False)
             self.invisible_meshes.remove(idx_mesh)
@@ -2319,7 +2319,7 @@ class PySubdivGUI(MainWindow):
                 button.setToolTip('deselect')
                 self.selected_meshes.append(idx_mesh)
                 self.plotter.add_mesh(self.input_meshes[idx_mesh], color='red', pickable=True, show_edges=True,
-                                      name=f"mesh_{idx_mesh}", opacity=100, reset_camera=False)
+                                      name=f"mesh_{idx_mesh}", opacity=1.0, reset_camera=False)
                 # set button to constrain the selection only on the boundary vertices/min max points
                 boundary_button.show()
                 boundary_button.setEnabled(True)
@@ -2347,7 +2347,7 @@ class PySubdivGUI(MainWindow):
 
             # make mesh unpickable and deselect
             self.plotter.add_mesh(self.input_meshes[idx_mesh], color='green', pickable=False, show_edges=True,
-                                  name=f"mesh_{idx_mesh}", opacity=100, reset_camera=False)
+                                  name=f"mesh_{idx_mesh}", opacity=1.0, reset_camera=False)
             # set state of the button to false
             button.setChecked(False)
             self.selected_meshes.remove(idx_mesh)
@@ -2567,7 +2567,7 @@ class PySubdivGUI(MainWindow):
                 pass
             else:
                 self.plotter.add_mesh(mesh, color='red', pickable=False, show_edges=True,
-                                      name=f"mesh_{idx_mesh}", opacity=100, reset_camera=False)
+                                      name=f"mesh_{idx_mesh}", opacity=1.0, reset_camera=False)
 
                 self.plotter.add_points(boundary_vertices, pickable=True, name=f"constrained_mesh{idx_mesh}",
                                         reset_camera=False)
@@ -2577,7 +2577,7 @@ class PySubdivGUI(MainWindow):
             button.setToolTip('constrain selection to boundary vertices')
             # remove actor for vertices on the boundary and make the mesh pickable again
             self.plotter.add_mesh(self.input_meshes[idx_mesh], color='red', pickable=True, show_edges=True,
-                                  name=f"mesh_{idx_mesh}", opacity=100, reset_camera=False)
+                                  name=f"mesh_{idx_mesh}", opacity=1.0, reset_camera=False)
             self.plotter.remove_actor(f"constrained_mesh{idx_mesh}")
             self.constrained_meshes.pop(idx_mesh)
 
@@ -2975,7 +2975,7 @@ class PySubdivGUI(MainWindow):
                         self.plotter.add_mesh(self.selection_mesh, scalars='selected', cmap=['black', 'purple'],
                                               pickable=True,
                                               show_edges=True,
-                                              name=f"selection", opacity=100, reset_camera=False,
+                                              name=f"selection", opacity=1.0, reset_camera=False,
                                               render_lines_as_tubes=True, line_width=10, show_scalar_bar=False)
                     else:
                         self.plotter.remove_actor('selection')
@@ -2998,7 +2998,7 @@ class PySubdivGUI(MainWindow):
                     self.plotter.add_mesh(self.selection_mesh, scalars='selected', cmap=['black', 'purple'],
                                           pickable=True,
                                           show_edges=True,
-                                          name=f"selection", opacity=100, reset_camera=False,
+                                          name=f"selection", opacity=1.0, reset_camera=False,
                                           render_lines_as_tubes=True, line_width=10, show_scalar_bar=False)
                     self.subdiv.edge_selection_changed()
 
@@ -3320,13 +3320,13 @@ class PySubdivGUI(MainWindow):
                 if self._state == States.mesh_subdivision:
                     opacity = self.subdiv.transparency
                 else:
-                    opacity = 100
+                    opacity = 1.0
 
                 self.plotter.add_mesh(self.input_meshes[idx_mesh], color='red', pickable=False, show_edges=True,
                                       name=f"mesh_{idx_mesh}", opacity=opacity, reset_camera=False)
 
                 self.plotter.add_mesh(self.selection_mesh, color='black', pickable=True, show_edges=True,
-                                      name=f"selection", opacity=100, reset_camera=False,
+                                      name=f"selection", opacity=1.0, reset_camera=False,
                                       render_lines_as_tubes=True, line_width=10)
 
                 vtk_custom_widget.enable_cell_picking(self.plotter, callback=self.edges_picker, through=False,
@@ -3343,7 +3343,7 @@ class PySubdivGUI(MainWindow):
             if self._state == States.mesh_subdivision:
                 opacity = self.subdiv.transparency
             else:
-                opacity = 100
+                opacity = 1.0
             self.plotter.add_mesh(self.input_meshes[idx_mesh], color='red', pickable=True, show_edges=True,
                                   name=f"mesh_{idx_mesh}", opacity=opacity, reset_camera=False)
 
@@ -3388,7 +3388,7 @@ class PySubdivGUI(MainWindow):
 
         self.plotter.add_mesh(self.selection_mesh, scalars='selected', cmap=['black', 'purple'], pickable=True,
                               show_edges=True,
-                              name=f"selection", opacity=100, reset_camera=False,
+                              name=f"selection", opacity=1.0, reset_camera=False,
                               render_lines_as_tubes=True, line_width=10, show_scalar_bar=False)
 
         if self._state == States.mesh_subdivision:
@@ -3409,14 +3409,14 @@ class PySubdivGUI(MainWindow):
 
         face_selection = self.input_meshes[idx_mesh].extract_cells(np.array(list(self.selected_faces[idx_mesh])))
         self.plotter.add_mesh(face_selection.extract_all_edges(), color='yellow', pickable=False, show_edges=True,
-                              name=f"face_selection", opacity=100, reset_camera=False)
+                              name=f"face_selection", opacity=1.0, reset_camera=False)
 
     def delete_faces(self):
         for idx_mesh in self.selected_faces:
             print(list(self.selected_faces[idx_mesh]))
             self.input_meshes[idx_mesh].remove_cells(np.array(list(self.selected_faces[idx_mesh])), inplace=True)
             self.plotter.add_mesh(self.input_meshes[idx_mesh], color='green', pickable=False, show_edges=True,
-                                  name=f"mesh_{idx_mesh}", opacity=100, reset_camera=False)
+                                  name=f"mesh_{idx_mesh}", opacity=1.0, reset_camera=False)
         self.pick_faces(False)
 
     def mesh_decimation(self, check):
@@ -3589,14 +3589,14 @@ class PySubdivGUI(MainWindow):
 
             # deactivate mesh for picking
             self.plotter.add_mesh(mesh, color='red', pickable=False, show_edges=True,
-                                  name=f"mesh_{idx_mesh}", opacity=100, reset_camera=False)
+                                  name=f"mesh_{idx_mesh}", opacity=1.0, reset_camera=False)
 
             if 'extrema' in mesh.array_names:
                 extrema_points_idx = np.nonzero(mesh["extrema"] == 1)
                 if len(extrema_points_idx) == 0:
                     # no min max found; make whole mesh pickable again
                     self.plotter.add_mesh(mesh, color='red', pickable=False, show_edges=True,
-                                          name=f"mesh_{idx_mesh}", opacity=100, reset_camera=False)
+                                          name=f"mesh_{idx_mesh}", opacity=1.0, reset_camera=False)
                 else:
                     extrema_points = mesh.points[extrema_points_idx]
                     self.plotter.add_points(extrema_points, pickable=True, name=f"constrained_mesh{idx_mesh}",
@@ -3658,7 +3658,7 @@ class PySubdivGUI(MainWindow):
                 if len(local_extrema) == 0:
                     # no min max found; make whole mesh pickable again
                     self.plotter.add_mesh(mesh, color='red', pickable=False, show_edges=True,
-                                          name=f"mesh_{idx_mesh}", opacity=100, reset_camera=False)
+                                          name=f"mesh_{idx_mesh}", opacity=1.0, reset_camera=False)
                 else:
                     extrema_points = points[local_extrema]
                     self.plotter.add_points(extrema_points, pickable=True, name=f"constrained_mesh{idx_mesh}",
@@ -3668,7 +3668,7 @@ class PySubdivGUI(MainWindow):
             button.setToolTip('constrain to extrema')
             # remove actor for vertices on min max and make the mesh pickable again
             self.plotter.add_mesh(self.input_meshes[idx_mesh], color='red', pickable=True, show_edges=True,
-                                  name=f"mesh_{idx_mesh}", opacity=100, reset_camera=False)
+                                  name=f"mesh_{idx_mesh}", opacity=1.0, reset_camera=False)
             self.plotter.remove_actor(f"constrained_mesh{idx_mesh}")
             self.constrained_meshes.pop(idx_mesh)
 
